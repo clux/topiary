@@ -4,26 +4,26 @@ var prettify = require('../')
 var tree = {
   name: "root"
 , deps: {
-    'sub1' : {
+    sub1 : {
       name : 'sub1Name'
     , deps : {}
     }
-  , 'sub2' : {
+  , sub2 : {
       name : 'sub2Name'
     , deps : {
-        'sub2sub' : {
+        sub2sub : {
           name : 'sub2subName'
         , deps : {}
         }
       }
     }
-  , 'sub3' : {
+  , sub3 : {
       name : 'sub3Name'
     , deps : {
-        'sub3sub' : {
+        sub3sub : {
           name : 'sub3subName'
         , deps : {
-            'sub3subsub' : {
+            sub3subsub : {
               name : 'sub3subsubName'
             , deps : {}
             }
@@ -31,7 +31,7 @@ var tree = {
         }
       }
     }
-  , 'sub4' : {
+  , sub4 : {
       name : 'sub4Name'
     , deps : {}
     }

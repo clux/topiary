@@ -28,20 +28,20 @@ i.e. with `recurseName = 'deps'` the tree printed above can look like this:
 var tree = {
   name: "root"
 , deps: {
-    'sub1' : {
+    sub1 : {
       name : 'sub1Name'
     , deps : {}
     }
-  , 'sub2' : {
+  , sub2 : {
       name : 'sub2Name'
     , deps : {
-        'sub2sub' : {
+        sub2sub : {
           name : 'sub2subName'
         , deps : {}
         }
       }
     }
-  , 'sub3' : {
+  , sub3 : {
       name : 'sub3Name'
     , deps : {}
     }
