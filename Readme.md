@@ -1,6 +1,7 @@
 # Topiary ![travis build status](https://secure.travis-ci.org/clux/topiary.png)
 
 Topiary is a utility that shapes tree structures into a prettified format ala `npm list`.
+It is used internally by [modul8](https://github.com/clux/modul8)'s internal [analyzer](https://github.com/clux/modul8/blob/master/lib/analyzer.js#L149).
 
 ## Usage
 Basic usage:
@@ -12,7 +13,7 @@ console.log(topiary(tree, recurseName, shapeFn));
 
 Basic output:
 
-````bash
+````b
 root
  ├───sub1Name
  ├──┬sub2Name
@@ -21,8 +22,8 @@ root
 ````
 
 ## Example
-`tree` is the recursively structured tree structured recursively with `recurseName`,
-i.e. with `recurseName = 'deps'` the tree printed above can look like this:
+`tree` is the tree structured recursively with `recurseName` as the key to recurse into.
+I.e. with `recurseName = 'deps'` the tree printed above can look like this:
 
 ````javascript
 var tree = {
@@ -80,7 +81,9 @@ var filterFn = function (el) {
 console.log(topiary(tree, 'deps', shapeFn, filterFn));
 ````
 
-````bash
+output:
+
+````
 root
  ├───sub1Name
  └───sub3Name
