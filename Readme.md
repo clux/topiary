@@ -1,6 +1,6 @@
 # Topiary ![travis build status](https://secure.travis-ci.org/clux/topiary.png)
 
-Topiary is a utility that shapes tree structures into nice prettified formats ala `npm list`.
+Topiary is a utility that shapes tree structures into a prettified format ala `npm list`.
 
 ## Usage
 Basic usage:
