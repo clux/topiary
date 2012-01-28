@@ -35,9 +35,9 @@ var tree = {
   , 'sub2' : {
       name : 'sub2Name'
     , deps : {
-      'sub2sub' : {
-        name : 'sub2subName'
-      , deps : {}
+        'sub2sub' : {
+          name : 'sub2subName'
+        , deps : {}
         }
       }
     }
