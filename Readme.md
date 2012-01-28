@@ -12,7 +12,7 @@ console.log(topiary(tree, recurseName, shapeFn));
 
 Basic output:
 
-````
+````bash
 root
  ├───sub1Name
  ├──┬sub2Name
@@ -80,7 +80,7 @@ var filterFn = function (el) {
 console.log(topiary(tree, 'deps', shapeFn, filterFn));
 ````
 
-````
+````bash
 root
  ├───sub1Name
  └───sub3Name
