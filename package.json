@@ -16,5 +16,6 @@
   },
   "dependencies": {},
   "devDependencies": {},
-  "optionalDependencies": {}
+  "optionalDependencies": {},
+  "license": "MIT"
 }
