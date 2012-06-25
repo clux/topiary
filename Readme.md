@@ -1,4 +1,4 @@
-# Topiary ![travis build status](https://secure.travis-ci.org/clux/topiary.png)
+# Topiary [![Build Status](https://secure.travis-ci.org/clux/topiary.png)](http://travis-ci.org/clux/topiary)
 
 Topiary is a utility that shapes tree structures into a prettified format ala `npm list`.
 It is used by [modul8](https://github.com/clux/modul8)'s internal [analyzer](https://github.com/clux/modul8/blob/master/lib/analyzer.js#L149).
