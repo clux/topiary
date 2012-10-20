@@ -6,26 +6,26 @@ It is used by [modul8](https://github.com/clux/modul8)'s internal [analyzer](htt
 ## Usage
 Basic usage:
 
-````javascript
+```javascript
 var topiary = require('topiary');
 console.log(topiary(tree, recurseName, shapeFn));
-````
+```
 
 Basic output:
 
-````b
+```b
 root
  ├───sub1Name
  ├──┬sub2Name
  │  └───sub2subName
  └───sub3Name
-````
+```
 
 ## Example
 `tree` is the tree structured recursively with `recurseName` as the key to recurse into.
 I.e. with `recurseName = 'deps'` the tree printed above can look like this:
 
-````javascript
+```javascript
 var tree = {
   name: "root"
 , deps: {
@@ -48,30 +48,30 @@ var tree = {
     }
   }
 };
-````
+```
 
 `shapeFn` is passed the element (for instance `tree.deps['sub1']`) and must return the
 string that should be used to name this element.
 
 If your structure is simple (like above) and only has a name property, you can return that:
 
-````javascript
+```javascript
 var shapeFn = function (el) { return el.name };
-````
+```
 
 Otherwise, you can shape the corresponding string anyway you like from the passed in branch.
 
 Using this `shapeFn` and `tree` we can produce the above output as follows:
 
-````javascript
+```javascript
 console.log(topiary(tree, 'deps', shapeFn));
-````
+```
 
 ### filterFn
 You can optionally pass in a function to help filter certain branches or leafs.
 Any children of an ignored element are ignored.
 
-````javascript
+```javascript
 var filterFn = function (el) {
   if (el.name === 'sub2Name') {
     return false;
@@ -79,28 +79,28 @@ var filterFn = function (el) {
   return true;
 };
 console.log(topiary(tree, 'deps', shapeFn, filterFn));
-````
+```
 
 output:
 
-````
+```
 root
  ├───sub1Name
  └───sub3Name
-````
+```
 
 
 ## Installation
 
-````bash
+```bash
 $ npm install topiary
-````
+```
 
 ## Running tests
 
-````bash
+```bash
 $ npm test
-````
+```
 
 ## License
 MIT-Licensed. See LICENSE file for details.
