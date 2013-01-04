@@ -31,13 +31,13 @@ module.exports = function (tree, recurseName, shapeFn, filterFn) {
         , forkChar    = hasChildren ? "┬" : "─"
         , isLast      = idx === bSize
         , turnChar    = isLast ? "└" : "├"
-        , indent      = [];
+        , indent      = '';
 
       for (var i = 0; i < level; i += 1) {
-        indent.push((parentAry[i] ? " " : "│") + "  ");
+        indent += (parentAry[i] ? " " : "│") + " ";
       }
 
-      lines.push(" " + indent.join('') + turnChar + "──" + forkChar + shapeFn(subEl));
+      lines.push(" " + indent + turnChar + "─" + forkChar + shapeFn(subEl));
 
       if (hasChildren) {
         // recurse into subEl's recursive tree keeping track of parent lines

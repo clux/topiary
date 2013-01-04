@@ -7,6 +7,10 @@
     "type": "git",
     "url": "git://github.com/clux/topiary.git"
   },
+  "keywords": [
+    "npm ls",
+    "tree"
+  ],
   "scripts": {
     "test": "node test/basic.js"
   },

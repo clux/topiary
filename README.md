@@ -15,10 +15,10 @@ Basic output:
 
 ```b
 root
- ├───sub1Name
- ├──┬sub2Name
- │  └───sub2subName
- └───sub3Name
+ ├──sub1Name
+ ├─┬sub2Name
+ │ └──sub2subName
+ └──sub3Name
 ```
 
 ## Example
@@ -27,24 +27,24 @@ I.e. with `recurseName = 'deps'` the tree printed above can look like this:
 
 ```javascript
 var tree = {
-  name: "root"
-, deps: {
+  name: "root",
+  deps: {
     sub1 : {
-      name : 'sub1Name'
-    , deps : {}
-    }
-  , sub2 : {
-      name : 'sub2Name'
-    , deps : {
+      name : 'sub1Name',
+      deps : {}
+    },
+    sub2 : {
+      name : 'sub2Name',
+      deps : {
         sub2sub : {
-          name : 'sub2subName'
-        , deps : {}
+          name : 'sub2subName',
+          deps : {}
         }
       }
-    }
-  , sub3 : {
-      name : 'sub3Name'
-    , deps : {}
+    },
+    sub3 : {
+      name : 'sub3Name',
+      deps : {}
     }
   }
 };
@@ -85,8 +85,8 @@ output:
 
 ```
 root
- ├───sub1Name
- └───sub3Name
+ ├──sub1Name
+ └──sub3Name
 ```
 
 
