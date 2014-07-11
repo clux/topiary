@@ -1,94 +1,69 @@
-# Topiary [![Build Status](https://secure.travis-ci.org/clux/topiary.png)](http://travis-ci.org/clux/topiary)
+# Topiary
+[![npm status](http://img.shields.io/npm/v/topiary.svg)](https://www.npmjs.org/package/topiary)
+[![build status](https://secure.travis-ci.org/clux/topiary.svg)](http://travis-ci.org/clux/topiary)
+[![dependency status](https://david-dm.org/clux/topiary.svg)](https://david-dm.org/clux/topiary)
+[![coverage status](http://img.shields.io/coveralls/clux/topiary.svg)](https://coveralls.io/r/clux/topiary)
+[![experimental](http://img.shields.io/badge/stability-experimental-DD5F0A.svg)](http://nodejs.org/api/documentation.html#documentation_stability_index)
 
 Topiary is a utility that shapes tree structures into a prettified format ala `npm list`.
-It is used by [modul8](https://github.com/clux/modul8)'s internal [analyzer](https://github.com/clux/modul8/blob/master/lib/analyzer.js#L149).
+It is used by [npm-graph](https://npmjs.org/npm-graph).
 
 ## Usage
-Basic usage:
+Given a tree structure and a key to recurse on, call topiary on that object:
 
-```javascript
+```js
 var topiary = require('topiary');
-console.log(topiary(tree, recurseName, shapeFn));
-```
 
-Basic output:
-
-```b
-root
- ├──sub1Name
- ├─┬sub2Name
- │ └──sub2subName
- └──sub3Name
-```
-
-## Example
-`tree` is the tree structured recursively with `recurseName` as the key to recurse into.
-I.e. with `recurseName = 'deps'` the tree printed above can look like this:
-
-```javascript
 var tree = {
   name: "root",
-  deps: {
-    sub1 : {
-      name : 'sub1Name',
-      deps : {}
+  deps: [
+    {
+      name : 'sub1',
+      deps : []
     },
-    sub2 : {
-      name : 'sub2Name',
-      deps : {
-        sub2sub : {
-          name : 'sub2subName',
-          deps : {}
-        }
-      }
+    {
+      name : 'sub2',
+      deps : [ { name : 'sub2sub', deps : [] } ]
     },
-    sub3 : {
-      name : 'sub3Name',
-      deps : {}
+    {
+      name : 'sub3',
+      deps : []
     }
-  }
+  ]
 };
+var nameFn = function (el) { return el.name };
+
+console.log(topiary(tree, 'deps', nameFn));
 ```
 
-`shapeFn` is passed the element (for instance `tree.deps['sub1']`) and must return the
-string that should be used to name this element.
-
-If your structure is simple (like above) and only has a name property, you can return that:
-
-```javascript
-var shapeFn = function (el) { return el.name };
-```
-
-Otherwise, you can shape the corresponding string anyway you like from the passed in branch.
-
-Using this `shapeFn` and `tree` we can produce the above output as follows:
-
-```javascript
-console.log(topiary(tree, 'deps', shapeFn));
-```
-
-### filterFn
-You can optionally pass in a function to help filter certain branches or leafs.
-Any children of an ignored element are ignored.
-
-```javascript
-var filterFn = function (el) {
-  if (el.name === 'sub2Name') {
-    return false;
-  }
-  return true;
-};
-console.log(topiary(tree, 'deps', shapeFn, filterFn));
-```
-
-output:
-
+Output:
 ```
 root
- ├──sub1Name
- └──sub3Name
+ ├──sub1
+ ├─┬sub2
+ │ └──sub2sub
+ └──sub3
 ```
 
+Note the `'deps'` string is the key to recurse on, expected to hold an array of objects of the same structure.
+
+## Extras
+### filter
+You can optionally pass in a function to help filter certain branches or leaf nodes:
+
+```js
+var filterFn = function (el) {
+  return (el.name !== 'sub2'); // everything but 'sub2' remains
+};
+console.log(topiary(tree, 'deps', nameFn, filterFn));
+```
+
+Output:
+```
+root
+ ├──sub1
+ └──sub3
+```
 
 ## Installation
 

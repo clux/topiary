@@ -1,64 +1,44 @@
 var prettify = require('../')
-  , assert = require('assert');
 
 var tree = {
-  name: "root"
-, deps: {
-    sub1 : {
-      name : 'sub1Name'
-    , deps : {}
-    }
-  , sub2 : {
-      name : 'sub2Name'
-    , deps : {
-        sub2sub : {
-          name : 'sub2subName'
-        , deps : {}
+  name: "root",
+  deps: [
+    { name : 'sub1', deps : [] },
+    {
+      name : 'sub2',
+      deps : [{ name : 'sub2sub', deps : [] }]
+    },
+    {
+      name : 'sub3',
+      deps : [
+        {
+          name : 'sub3sub',
+          deps : [{ name : 'sub3subsub', deps : [] }]
         }
-      }
-    }
-  , sub3 : {
-      name : 'sub3Name'
-    , deps : {
-        sub3sub : {
-          name : 'sub3subName'
-        , deps : {
-            sub3subsub : {
-              name : 'sub3subsubName'
-            , deps : {}
-            }
-          }
-        }
-      }
-    }
-  , sub4 : {
-      name : 'sub4Name'
-    , deps : {}
-    }
-  }
+      ]
+    },
+    { name : 'sub4', deps : [] }
+  ]
 };
 
-var shapeFn = function (el) { return el.name };
-var ignoreFn = function (el) {
-  if (el.name === 'sub2Name') {
-    return false;
-  }
-  return true;
+var nameFn = function (el) {
+  return el.name;
+};
+var filterFn = function (el) {
+  return (el.name !== 'sub2'); // everything else stays
 };
 
-var testIt = function () {
-  var output = prettify(tree, 'deps', shapeFn).split('\n');
-  assert.equal(output.length, 8, "8 elements including root");
+exports.output = function (t) {
+  var output = prettify(tree, 'deps', nameFn).split('\n');
+  t.equal(output.length, 8, "8 elements including root");
 
-  output = prettify(tree, 'deps', shapeFn, ignoreFn).split('\n');
-  assert.equal(output.length, 6, "6 elements remaining after filtering one + one child");
+  output = prettify(tree, 'deps', nameFn, filterFn).split('\n');
+  t.equal(output.length, 6, "6 elements remaining after filtering one + one child");
 
-  output = prettify(tree, 'wrongKey', shapeFn).split('\n');
-  assert.equal(output.length, 1, "only root survives if wrong key");
+  output = prettify(tree, 'wrongKey', nameFn).split('\n');
+  t.equal(output.length, 1, "only root survives if wrong key");
 
-  output = prettify(tree, 'deps', shapeFn, function () { return false; }).split('\n');
-  assert.equal(output.length, 1, "only root survives if all filtered out");
-
-  console.log('tests done');
+  output = prettify(tree, 'deps', nameFn, function () { return false; }).split('\n');
+  t.equal(output.length, 1, "only root survives if all filtered out");
+  t.done();
 };
-testIt();

@@ -5,15 +5,25 @@
   "version": "0.0.2",
   "repository": {
     "type": "git",
-    "url": "git://github.com/clux/topiary.git"
+    "url": "clux/topiary"
   },
   "keywords": [
     "npm ls",
     "tree"
   ],
+  "main": "index.js",
   "scripts": {
-    "test": "node test/basic.js"
+    "test": "$(npm bin)/nodeunit --reporter=verbose test/*.js",
+    "coveralls": "$(npm bin)/jscoverage lib && TOPIARY_COV=1 $(npm bin)/nodeunit --reporter=lcov test | $(npm bin)/coveralls"
   },
-  "main": "topiary.js",
+  "dependencies": {},
+  "devDependencies": {
+    "nodeunit": "~0.9.0",
+    "jscoverage": "~0.5.4",
+    "coveralls": "~2.11.1"
+  },
+  "bugs": {
+    "url": "http://github.com/clux/dye/issues"
+  },
   "license": "MIT"
 }
