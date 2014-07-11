@@ -1,3 +1,7 @@
+1.0.1 / 2014-07-11
+==================
+  * Fix turnChar bug introduced in rewrite.
+
 1.0.0 / 2014-07-11
 ==================
   * Rewritten to recurse into an array rather an object - see readme
