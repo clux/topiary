@@ -45,7 +45,9 @@ root
  └──sub3
 ```
 
-Note the `'deps'` string is the key to recurse on, expected to hold an array of objects of the same structure.
+The `'deps'` string is the key to recurse on, expected to hold an array of objects of the same structure.
+
+The nameFn is called once per output line to create the text representation of the object.
 
 ## Extras
 ### filter
