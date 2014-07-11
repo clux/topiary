@@ -3,6 +3,7 @@
   "name": "topiary",
   "description": "Prettify and shape tree structures for printing",
   "version": "0.0.2",
+  "stability": "unstable",
   "repository": {
     "type": "git",
     "url": "clux/topiary"
@@ -23,7 +24,7 @@
     "coveralls": "~2.11.1"
   },
   "bugs": {
-    "url": "http://github.com/clux/dye/issues"
+    "url": "http://github.com/clux/topiary/issues"
   },
   "license": "MIT"
 }

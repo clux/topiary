@@ -35,8 +35,9 @@ exports.output = function (t) {
   output = prettify(tree, 'deps', nameFn, filterFn).split('\n');
   t.equal(output.length, 6, "6 elements remaining after filtering one + one child");
 
-  output = prettify(tree, 'wrongKey', nameFn).split('\n');
-  t.equal(output.length, 1, "only root survives if wrong key");
+  t.throws(function () {
+    output = prettify(tree, 'wrongKey', nameFn).split('\n');
+  }, null, "invalid usage when no recurseName key on entry object");
 
   output = prettify(tree, 'deps', nameFn, function () { return false; }).split('\n');
   t.equal(output.length, 1, "only root survives if all filtered out");
