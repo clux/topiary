@@ -45,7 +45,9 @@ root
 
 The `'deps'` string is the key to recurse on, expected to hold an array of objects of the same structure.
 
-## Extras
+## Options
+A third options object can be supplied to topiary with the following key/value combinations:
+
 ### label
 If labelling by the default `name` key is not working, you can supply your own labeller:
 
