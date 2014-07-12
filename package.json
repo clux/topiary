@@ -2,7 +2,7 @@
   "author": "Eirik Albrigtsen <analsandblaster@gmail.com>",
   "name": "topiary",
   "description": "Prettify and shape tree structures for printing",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "stability": "stable",
   "repository": {
     "type": "git",
