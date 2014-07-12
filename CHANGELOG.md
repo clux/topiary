@@ -1,3 +1,7 @@
+1.1.1 / 2014-07-12
+==================
+  * Misnamed keys in documentation
+
 1.1.0 / 2014-07-12
 ==================
   * Third input changed - is now an object of optionals:

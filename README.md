@@ -48,14 +48,22 @@ The `'deps'` string is the key to recurse on, expected to hold an array of objec
 ## Options
 A third options object can be supplied to topiary with the following key/value combinations:
 
-### label
+### name
 If labelling by the default `name` key is not working, you can supply your own labeller:
 
 ```js
 var namer = function (obj) {
-  return '#' + obj.id;
+  return '#' + obj.name; // combine stuff from object into a sensible string
 };
-console.log(topiary(tree, 'deps', { label: namer }));
+console.log(topiary(tree, 'deps', { name: namer }));
+```
+
+```
+root
+ ├──#sub1
+ ├─┬#sub2
+ │ └──#sub2sub
+ └──#sub3
 ```
 
 ### filter

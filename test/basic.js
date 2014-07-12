@@ -32,17 +32,27 @@ exports.output = function (t) {
     ]
   };
 
-  var output = prettify(tree, 'deps', { label: nameFn }).split('\n');
+  var output = prettify(tree, 'deps', { name: nameFn }).split('\n');
   t.equal(output.length, 8, "8 elements including root");
+  t.deepEqual(output, [
+    'root',
+     ' ├──sub1',
+     ' ├─┬sub2',
+     ' │ └──sub2sub',
+     ' ├─┬sub3',
+     ' │ └─┬sub3sub',
+     ' │   └──sub3subsub',
+     ' └──sub4'
+  ], "full tree");
 
-  output = prettify(tree, 'deps', { label: nameFn, filter: isNotSub2 }).split('\n');
+  output = prettify(tree, 'deps', { name: nameFn, filter: isNotSub2 }).split('\n');
   t.equal(output.length, 6, "6 elements remaining after filtering one + one child");
 
   t.throws(function () {
-    output = prettify(tree, 'wrongKey', { label: nameFn }).split('\n');
+    output = prettify(tree, 'wrongKey', { name: nameFn }).split('\n');
   }, null, "invalid usage when no recurseName key on entry object");
 
-  output = prettify(tree, 'deps', { label: nameFn, filter: falseFn }).split('\n');
+  output = prettify(tree, 'deps', { name: nameFn, filter: falseFn }).split('\n');
   t.equal(output.length, 1, "only root survives if all filtered out");
   t.done();
 };
