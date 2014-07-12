@@ -1,74 +1,78 @@
 var prettify = require('../');
 
 var nameFn = function (el) {
-  return el.name;
+  return el.key;
 };
-var filterFn = function (el) {
-  return (el.name !== 'sub2'); // everything else stays
+var isNotSub2 = function (el) {
+  return (el.key !== 'sub2'); // everything else stays
+};
+var falseFn = function () {
+  return false;
 };
 
 exports.output = function (t) {
   var tree = {
-    name: "root",
+    key: "root",
     deps: [
-      { name : 'sub1', deps : [] },
+      { key: 'sub1', deps : [] },
       {
-        name : 'sub2',
-        deps : [{ name : 'sub2sub', deps : [] }]
+        key: 'sub2',
+        deps: [{ key: 'sub2sub', deps: [] }]
       },
       {
-        name : 'sub3',
-        deps : [
+        key: 'sub3',
+        deps: [
           {
-            name : 'sub3sub',
-            deps : [{ name : 'sub3subsub', deps : [] }]
+            key: 'sub3sub',
+            deps: [{ key: 'sub3subsub', deps: [] }]
           }
         ]
       },
-      { name : 'sub4', deps : [] }
+      { key: 'sub4', deps: [] }
     ]
   };
 
-  var output = prettify(tree, 'deps', nameFn).split('\n');
+  var output = prettify(tree, 'deps', { label: nameFn }).split('\n');
   t.equal(output.length, 8, "8 elements including root");
 
-  output = prettify(tree, 'deps', nameFn, filterFn).split('\n');
+  output = prettify(tree, 'deps', { label: nameFn, filter: isNotSub2 }).split('\n');
   t.equal(output.length, 6, "6 elements remaining after filtering one + one child");
 
   t.throws(function () {
-    output = prettify(tree, 'wrongKey', nameFn).split('\n');
+    output = prettify(tree, 'wrongKey', { label: nameFn }).split('\n');
   }, null, "invalid usage when no recurseName key on entry object");
 
-  output = prettify(tree, 'deps', nameFn, function () { return false; }).split('\n');
+  output = prettify(tree, 'deps', { label: nameFn, filter: falseFn }).split('\n');
   t.equal(output.length, 1, "only root survives if all filtered out");
   t.done();
 };
 
 exports.bigtree = function (t) {
   var tree = {
-    "name": "dye",
-    "deps": [
+    name: "dye",
+    deps: [
       {
-        "name": "./lib-cov/dye.js",
-        "deps": [
+        name: "./lib-cov/dye.js",
+        deps: [
           {
-            "name": "./zalgo",
-            "deps": [ { "name": "trials", "deps": [] } ]
+            name: "./zalgo",
+            deps: [ { name: "trials", deps: [] } ]
           }
         ]
       },
       {
-        "name": "./lib/dye.js",
-        "deps": [
+        name: "./lib/dye.js",
+        deps: [
           {
-            "name": "./zalgo",
-            "deps": [ { "name": "trials", "deps": [] } ]
+            name: "./zalgo",
+            deps: [ { name: "trials", deps: [] } ]
           }
         ]
       }
     ]
   };
-  var output = prettify(tree, 'deps', nameFn).split('\n');
+  // NB: do not need nameFn here
+  var output = prettify(tree, 'deps', { sort: true }).split('\n');
   t.deepEqual(output, [
     'dye',
     ' ├─┬./lib-cov/dye.js',

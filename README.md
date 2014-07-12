@@ -31,9 +31,7 @@ var tree = {
     }
   ]
 };
-var nameFn = function (el) { return el.name };
-
-console.log(topiary(tree, 'deps', nameFn));
+console.log(topiary(tree, 'deps'));
 ```
 
 Output:
@@ -47,17 +45,25 @@ root
 
 The `'deps'` string is the key to recurse on, expected to hold an array of objects of the same structure.
 
-The nameFn is called once per output line to create the text representation of the object.
-
 ## Extras
+### label
+If labelling by the default `name` key is not working, you can supply your own labeller:
+
+```js
+var namer = function (obj) {
+  return '#' + obj.id;
+};
+console.log(topiary(tree, 'deps', { label: namer }));
+```
+
 ### filter
 You can optionally pass in a function to help filter certain branches or leaf nodes:
 
 ```js
-var filterFn = function (el) {
-  return (el.name !== 'sub2'); // everything but 'sub2' branch remains
+var isNotSub2 = function (el) {
+  return (el.name !== 'sub2');
 };
-console.log(topiary(tree, 'deps', nameFn, filterFn));
+console.log(topiary(tree, 'deps', { filter: isNotSub2 }));
 ```
 
 Output:
@@ -66,6 +72,15 @@ root
  ├──sub1
  └──sub3
 ```
+
+### sort
+You can ask topiary to sort the `recurseName` array before starting to work on it. This solves non-deterministic outputs sometimes produced if it is generated in a non-deterministic manner:
+
+```js
+console.log(topiary(tree, 'deps', { label: namer, sort: true }));
+```
+
+Note that sorting is done lexicographically based on the labels output by the label functions.
 
 ## Installation
 
