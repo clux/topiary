@@ -1,4 +1,4 @@
-var prettify = require('../');
+var prettify = require(process.env.TOPIARY_COV ? '../topiary-cov.js' : '../');
 
 var nameFn = function (el) {
   return el.key;
