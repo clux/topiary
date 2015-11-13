@@ -3,7 +3,6 @@
 [![build status](https://secure.travis-ci.org/clux/topiary.svg)](http://travis-ci.org/clux/topiary)
 [![dependency status](https://david-dm.org/clux/topiary.svg)](https://david-dm.org/clux/topiary)
 [![coverage status](http://img.shields.io/coveralls/clux/topiary.svg)](https://coveralls.io/r/clux/topiary)
-[![stable](http://img.shields.io/badge/stability-stable-74C614.svg)](http://nodejs.org/api/documentation.html#documentation_stability_index)
 
 Topiary is a utility that shapes tree structures into a prettified format ala `npm list`.
 It is used by [npm-graph](https://npmjs.org/package/npm-graph).
@@ -96,12 +95,6 @@ Note that sorting is done lexicographically based on the labels output by the la
 
 ```bash
 $ npm install topiary
-```
-
-## Running tests
-
-```bash
-$ npm test
 ```
 
 ## License

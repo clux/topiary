@@ -1,3 +1,7 @@
+1.1.2 / 2015-11-14
+==================
+  * Added npmignore
+
 1.1.1 / 2014-07-12
 ==================
   * Misnamed keys in documentation

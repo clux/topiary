@@ -3,7 +3,6 @@
   "name": "topiary",
   "description": "Prettify and shape tree structures for printing",
   "version": "1.1.1",
-  "stability": "stable",
   "repository": {
     "type": "git",
     "url": "clux/topiary"
@@ -15,14 +14,12 @@
   "main": "topiary.js",
   "scripts": {
     "test": "nodeunit --reporter=verbose test/*.js",
-    "coverage": "jscoverage topiary.js && TOPIARY_COV=1 nodeunit --reporter=lcov test",
-    "coveralls": "npm run coverage | coveralls"
+    "coverage": "jscoverage topiary.js && TOPIARY_COV=1 nodeunit --reporter=lcov test"
   },
   "dependencies": {},
   "devDependencies": {
     "nodeunit": "~0.9.0",
-    "jscoverage": "~0.5.4",
-    "coveralls": "~2.11.1"
+    "jscoverage": "~0.5.4"
   },
   "bugs": {
     "url": "http://github.com/clux/topiary/issues"
